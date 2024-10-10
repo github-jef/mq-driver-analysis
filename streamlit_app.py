@@ -8,6 +8,8 @@ def is_sig(val):
     color = 'green' if val <= 0.05 else 'red'
     return f'background-color: {color}; color: white;'
 
+st.title(':blue[Marquant Driver Analysis App]')
+
 uploaded_file = st.file_uploader('Choose a file')
 
 if uploaded_file is not None:
