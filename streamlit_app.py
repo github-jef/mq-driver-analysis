@@ -33,6 +33,9 @@ if uploaded_file is not None:
        xNames = independents
        full_list = [yName] + xNames
 
+       # Complete cases only
+       df.dropna(axis = 0, how = 'any', inplace = True)
+
        correls = df[full_list].corr()[yName].tolist()[1:]
 
        model = sm.OLS(df[yName], sm.add_constant(df[xNames]))
