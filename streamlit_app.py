@@ -54,9 +54,6 @@ if uploaded_file is not None:
        st.subheader('Results')
        st.write(f"Base size: {df.shape[0]}")
        st.write(f"R Square: {r_square:.2f}")
-       df.shape[0]
-
-
 
        st.dataframe(
            df_results.style.applymap(is_sig, subset=['pvalue']),
