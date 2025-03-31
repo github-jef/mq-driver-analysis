@@ -24,6 +24,13 @@ if uploaded_file is not None:
    st.subheader('Please select the independent variables:')
    independents = st.multiselect('Select the independent variables:', df.columns)
 
+   st.subheader('Please select filter variable if required:')
+   filter_var = st.selectbox('Select one variable:', df.columns)
+
+   if filter_var is not None:
+       all_codes = sorted(df[filter_var].unique())
+       filter_codes = st.multiselect('Select the values required for the filter:', df.columns)
+
    main_body = st.form('main_body')
    submit = main_body.form_submit_button("Calculate")
 
