@@ -25,7 +25,7 @@ if uploaded_file is not None:
    independents = st.multiselect('Select the independent variables:', df.columns, key = "independents")
 
    st.subheader('Please select filter variable if required:')
-   filter_var = st.selectbox('Select one variable:', df.columns, key = "filter_var")
+   filter_var = st.selectbox('Select one variable:', df.columns, index = None, key = "filter_var")
 
    if filter_var is not None:
        all_codes = sorted(df[filter_var].unique())
