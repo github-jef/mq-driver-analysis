@@ -36,21 +36,26 @@ if uploaded_file is not None:
 
    if submit:
 
+       if filter_var is not None:
+           df2 = df[df[filter_var].isin(filter_codes)]
+       else:
+           df2 = df
+
        yName = dependent
        xNames = independents
        full_list = [yName] + xNames
 
        # Complete cases only
-       df.dropna(axis = 0, how = 'any', inplace = True)
+       df2.dropna(axis = 0, how = 'any', inplace = True)
 
-       correls = df[full_list].corr()[yName].tolist()[1:]
+       correls = df2[full_list].corr()[yName].tolist()[1:]
 
-       model = sm.OLS(df[yName], sm.add_constant(df[xNames]))
+       model = sm.OLS(df2[yName], sm.add_constant(df2[xNames]))
        model_fit = model.fit()
        coeffs = model_fit.params.tolist()[1:]
        pvalues = model_fit.pvalues.tolist()[1:]
 
-       df_results = relativeImp(df, outcomeName = yName, driverNames = xNames)
+       df_results = relativeImp(df2, outcomeName = yName, driverNames = xNames)
        r_square = df_results['rawRelaImpt'].sum()       
 
        df_results.insert(1, 'pvalue', pvalues)
@@ -59,7 +64,7 @@ if uploaded_file is not None:
 
        st.title('Driver Analysis Results')       
        st.subheader('Results')
-       st.write(f"Base size: {df.shape[0]}")
+       st.write(f"Base size: {df2.shape[0]}")
        st.write(f"R Square: {r_square:.2f}")
 
        st.dataframe(
