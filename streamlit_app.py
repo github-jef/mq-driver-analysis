@@ -29,7 +29,7 @@ if uploaded_file is not None:
 
    if filter_var is not None:
        all_codes = sorted(df[filter_var].unique())
-       filter_codes = st.multiselect('Select the values required for the filter:', df.columns, key = "filter_codes")
+       filter_codes = st.multiselect('Select the values required for the filter:', all_codes, key = "filter_codes")
 
    main_body = st.form('main_body')
    submit = main_body.form_submit_button("Calculate")
